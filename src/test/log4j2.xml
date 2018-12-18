@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status=debug 可以查看log4j的装配过程 -->
+<!--status 用来指定log4j本身的打印日志的级别.monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位是s,最小是5s.-->
+<configuration status="DEBUG" monitorInterval="30">
+    <properties>
+        <Property name="CATALINA_BASE_LOGPATH">./</Property>
+        <property name="PROJECT_LOG">${CATALINA_BASE_LOGPATH}/xspiderServerDevlogs</property>
+        <property name="PATTERN_LAYOUT">[%date{yyyy-MM-dd HH:mm:ss.SSS}] [%level] [%c] [%L] : %msg%n</property>
+    </properties>
+
+    <appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${PATTERN_LAYOUT}" charset="utf-8"/>
+        </Console>
+
+        <!--warn及以下日志-->
+        <RollingFile name="DEBUG" fileName="${PROJECT_LOG}/debug.log"
+                     filePattern="${PROJECT_LOG}/debug-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${PATTERN_LAYOUT}"/>
+            <Filters>
+                <!--如果是error级别拒绝-->
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <!--如果是debug\info\warn输出-->
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <!--单个文件大小-->
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <!--保存日志文件个数-->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <RollingFile name="INFO" fileName="${PROJECT_LOG}/info.log"
+                     filePattern="${PROJECT_LOG}/info-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${PATTERN_LAYOUT}"/>
+            <Filters>
+                <!--如果是error级别拒绝-->
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <!--如果是debug\info\warn输出-->
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <!--单个文件大小-->
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <!--保存日志文件个数-->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <RollingFile name="WARN" fileName="${PROJECT_LOG}/warn.log"
+                     filePattern="${PROJECT_LOG}/warn-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${PATTERN_LAYOUT}"/>
+            <Filters>
+                <!--如果是error级别拒绝-->
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <!--如果是debug\info\warn输出-->
+                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <!--单个文件大小-->
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <!--保存日志文件个数-->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <!--error级别日志输出-->
+        <RollingFile name="ERROR" fileName="${PROJECT_LOG}/error.log"
+                     filePattern="${PROJECT_LOG}/error-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${PATTERN_LAYOUT}"/>
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <!-- 定义根logger -->
+        <!-- 日志级别设备为debug 具体日志级别由appender限制 -->
+        <root level="debug">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="DEBUG"/>
+            <AppenderRef ref="INFO"/>
+            <AppenderRef ref="WARN"/>
+            <AppenderRef ref="ERROR"/>
+        </root>
+    </loggers>
+</configuration>
