@@ -14,6 +14,8 @@ public class HbaseSystemException extends UncategorizedDataAccessException {
     }
 
     public HbaseSystemException(Throwable throwable) {
+
         super(throwable.getMessage(), throwable);
+
     }
 }

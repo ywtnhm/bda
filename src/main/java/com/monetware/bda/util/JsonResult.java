@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JsonResult {
-    private boolean success;
+
+    private String  code;
 
     private String msg;
 
@@ -12,37 +13,41 @@ public class JsonResult {
 
     private Map<String, Object> extras;
 
-    public JsonResult(boolean success) {
-        this(success, "");
+    public JsonResult(String  code) {
+        this( code, "");
     }
 
-    public JsonResult(boolean success, Object data) {
-        this(success, "", data);
+    public JsonResult(String  code, Object data) {
+        this( code, "", data);
     }
 
-    public JsonResult(boolean success, String msg) {
-        this(success, msg, null);
+    public JsonResult(String  code, String msg) {
+        this( code, msg, null);
     }
 
-    public JsonResult(boolean success, String msg, Object data) {
-        this.success = success;
+    public JsonResult(String  code, String msg, Object data) {
+        this. code =  code;
         this.msg = msg;
         this.data = data;
     }
 
-    public JsonResult(boolean success, String msg, Object data, Map<String, Object> extras) {
-        this.success = success;
+    public JsonResult(String  code, String msg, Object data, Map<String, Object> extras) {
+        this. code =  code;
         this.msg = msg;
         this.data = data;
         this.extras = extras;
     }
 
-    public boolean isSuccess() {
-        return success;
+    public String getCode() {
+        return code;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setExtras(Map<String, Object> extras) {
+        this.extras = extras;
     }
 
     public String getMsg() {

@@ -18,8 +18,8 @@ spring:
 
   data:
     hbase:
-      quorum: monetware.eicp.net
-      clientPort: 31291
+      quorum: node2
+      clientPort: 2181
       #spring:
       #  data:
       #    hbase:
