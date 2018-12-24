@@ -20,16 +20,3 @@ spring:
     hbase:
       quorum: node2
       clientPort: 2181
-      #spring:
-      #  data:
-      #    hbase:
-      #      quorum: node2
-      #      clientPort: 2181
-      #rootDir: '/hbase'
-#  datasource:
-#    driver-class-name: com.mysql.jdbc.Driver
-#    password: monetware
-#    url: jdbc:mysql://175.102.15.229:13306/ringspider3?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
-#    username: root
-
-#    type: com.alibaba.druid.pool.DruidDataSource
