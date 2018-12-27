@@ -5,10 +5,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.repository.Repository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-public interface NewsRepository extends Repository<News, String> {
+/*
+* 不实现 会报错
+* 各种错
+* */
+@Component
+public interface NewsRepository /*extends Repository<News, String>*/ {
 
     List<News> findByNameAndPrice(String name, Integer price);
 
